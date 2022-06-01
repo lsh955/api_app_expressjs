@@ -31,10 +31,10 @@ exports.routers = {
                 data    : data,
                 duration: new Date() - startTime
             })
-        }).catch(function (err) {
+        }).catch(function (error) {
             return res.status(500).json({
                 code   : 'FAILURE',
-                message: err
+                message: error
             })
         })
     }
@@ -55,8 +55,8 @@ exports.logs = {
     warn : (message) => {
         console.warn(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tWARN\t' + process.env.SERVER_NAME + '\t' + message)
     },
-    error: (message, e) => {
-        console.error(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tERROR\t' + process.env.SERVER_NAME + '\t' + message, e)
+    error: (message, error) => {
+        console.error(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tERROR\t' + process.env.SERVER_NAME + '\t' + message, error)
     },
     time : moment().format('YYYY-MM-DD HH:mm:ss.SSS')
 }
