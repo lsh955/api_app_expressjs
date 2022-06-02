@@ -32,7 +32,8 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 formatter.logs.info('*******************************************')
-formatter.logs.info('SERVER START... PORT = ' + port)
+formatter.logs.info(`SERVER START... PORT = ${port}`)
+formatter.logs.info(`NODE_ENV = ${process.env.NODE_ENV}`)
 formatter.logs.info('*******************************************')
 
 /**
