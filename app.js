@@ -4,6 +4,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+const dotenv = require("dotenv");
+
+dotenv.config({
+    path: path.resolve(
+        process.cwd(),
+        process.env.NODE_ENV === "development"
+            ? ".env.dev"
+            : process.env.NODE_ENV === "local"
+                ? ".env.local"
+                : ".env"
+    ),
+});
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
