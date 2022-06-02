@@ -3,8 +3,8 @@ const maria = require("../config/database");
 const getUserList = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = `select *
-                         from users`;
+            const sql = `SELECT *
+                         FROM users`;
 
             maria.getConnection((error, connection) => {
                 connection.query(sql, (error, rows) => {
