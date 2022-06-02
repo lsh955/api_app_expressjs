@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-let connection  = {
+let connection = {
     host: process.env.MariaDB_HOST,
     port: process.env.MariaDB_PORT,
     user: process.env.MariaDB_USER,

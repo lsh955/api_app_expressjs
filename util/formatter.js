@@ -18,22 +18,22 @@ exports.routers = {
 
         if (!_.isEmpty(validation)) {
             return res.status(400).json({
-                code   : 'VALIDATION_FAILURE',
+                code: 'VALIDATION_FAILURE',
                 message: validation[0].msg
             })
         }
 
         await funcName.call(null, req.query).then(function (data) {
             return res.status(200).json({
-                code    : 'SUCCESS',
-                message : '성공',
-                doDT    : new Date(),
-                data    : data,
+                code: 'SUCCESS',
+                message: '성공',
+                doDT: new Date(),
+                data: data,
                 duration: new Date() - startTime
             })
         }).catch(function (error) {
             return res.status(500).json({
-                code   : 'FAILURE',
+                code: 'FAILURE',
                 message: error
             })
         })
@@ -49,14 +49,14 @@ exports.logs = {
     debug: (message) => {
         console.debug(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tDEBUG\t' + process.env.SERVER_NAME + '\t' + message)
     },
-    info : (message) => {
+    info: (message) => {
         console.log(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tINFO\t' + process.env.SERVER_NAME + '\t' + message)
     },
-    warn : (message) => {
+    warn: (message) => {
         console.warn(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tWARN\t' + process.env.SERVER_NAME + '\t' + message)
     },
     error: (message, error) => {
         console.error(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tERROR\t' + process.env.SERVER_NAME + '\t' + message, error)
     },
-    time : moment().format('YYYY-MM-DD HH:mm:ss.SSS')
+    time: moment().format('YYYY-MM-DD HH:mm:ss.SSS')
 }
