@@ -9,6 +9,7 @@ const getUserList = () => {
             maria.getConnection((error, connection) => {
                 connection.query(sql, (error, rows) => {
                     if (error) {
+                        러(`getUserList SQL Error >> ${error}`)
                         console.log(`message: ${error.message}`)
                         console.log(`sql: ${error.sql}`)
                         console.log(`code: ${error.code}`)
