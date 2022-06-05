@@ -1,10 +1,10 @@
 const maria = require("../config/database");
 
-const getUserList = () => {
+const getUserList = async () => {
     return new Promise((resolve, reject) => {
         try {
             const sql = `SELECT *
-                         FROM users`;
+                         FROM test_data`;
 
             maria.getConnection((error, connection) => {
                 connection.query(sql, (error, rows) => {
@@ -13,28 +13,20 @@ const getUserList = () => {
                         console.log(`message: ${error.message}`)
                         console.log(`sql: ${error.sql}`)
                         console.log(`code: ${error.code}`)
-                        reject({
-                            status: 500,
-                            value: {success: false, message: "getUserList SQL Error"}
-                        })
+                        reject("getUserList SQL Error")
                     } else {
                         console.log('getUserList rows >>', rows)
-                        resolve({
-                            status: 200,
-                            value: {success: true, data: rows}
-                        })
+                        resolve(rows)
                     }
                 })
             })
         } catch (error) {
             console.log(`getUserList Function Error >> ${error}`)
-            reject({
-                status: 500,
-                value: {success: false, message: error}
-            })
+            reject(error)
         }
     })
 }
+
 
 module.exports = {
     getUserList
