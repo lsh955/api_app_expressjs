@@ -19,6 +19,7 @@ const getUserList = async () => {
                         resolve(rows)
                     }
                 })
+                connection.release(); // Connectino Pool 반환
             })
         } catch (error) {
             console.log(`getUserList Function Error >> ${error}`)
