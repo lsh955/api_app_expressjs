@@ -6,13 +6,10 @@ const {validationResult} = require('express-validator')
 
 /**
  * router API 결과 단일화를 위한 처리
- * @type {{responseForm: ((function(*, *, *): Promise<*|undefined>)|*)}}
+ * @type {{validationForm: ((function(*, *): Promise<*|undefined>)|*), responseForm: ((function(*, *, *): Promise<void>)|*)}}
  */
 exports.routers = {
-    responseForm: async (req, res, funcName) => {
-        // 최초 요청부터 완료까지 시간측정을 위한 셋팅.
-        const startTime = new Date();
-
+    validationForm: async (req, res) => {
         // 파라미터 조건이 맞지 않는경우, message return
         const validation = validationResult(req).array()
 
@@ -22,8 +19,12 @@ exports.routers = {
                 message: validation[0].msg
             })
         }
+    },
+    responseForm: async (req, res, data) => {
+        // 최초 요청부터 완료까지 시간측정을 위한 셋팅.
+        const startTime = new Date();
 
-        await funcName.call(null, req.query).then(function (data) {
+        try {
             return res.status(200).json({
                 code: 'SUCCESS',
                 message: '성공',
@@ -31,12 +32,12 @@ exports.routers = {
                 data: data,
                 duration: new Date() - startTime
             })
-        }).catch(function (error) {
+        } catch (error) {
             return res.status(500).json({
                 code: 'FAILURE',
                 message: error
             })
-        })
+        }
     }
 }
 
