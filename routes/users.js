@@ -8,6 +8,8 @@ const {getUserList} = require("../service/users");
  * 유저정보 불러오기
  */
 router.get('/list', async (req, res) => {
+    await formatter.routers.validationForm(req, res)
+
     await formatter.routers.responseForm(req, res, getUserList)
 });
 
