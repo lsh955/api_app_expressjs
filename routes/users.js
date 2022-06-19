@@ -10,7 +10,9 @@ const {getUserList} = require("../service/users");
 router.get('/list', async (req, res) => {
     await formatter.routers.validationForm(req, res)
 
-    await formatter.routers.responseForm(req, res, getUserList)
+    getUserList
+        .then(result => formatter.routers.responseForm(result))
+        .catch(error => formatter.routers.responseForm(error))
 });
 
 module.exports = router;
