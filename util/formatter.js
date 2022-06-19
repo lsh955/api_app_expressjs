@@ -9,34 +9,34 @@ const {validationResult} = require('express-validator')
  * @type {{validationForm: ((function(*, *): Promise<*|undefined>)|*), responseForm: ((function(*, *, *): Promise<void>)|*)}}
  */
 exports.routers = {
-    validationForm: async (req, res) => {
+    validationForm: async (req) => {
         // 파라미터 조건이 맞지 않는경우, message return
         const validation = validationResult(req).array()
 
         if (!_.isEmpty(validation)) {
-            return res.status(400).json({
+            return {
                 code: 'VALIDATION_FAILURE',
                 message: validation[0].msg
-            })
+            }
         }
     },
-    responseForm: async (req, res, data) => {
+    responseForm: async (data) => {
         // 최초 요청부터 완료까지 시간측정을 위한 셋팅.
         const startTime = new Date();
 
         try {
-            return res.status(200).json({
+            return {
                 code: 'SUCCESS',
                 message: '성공',
                 doDT: new Date(),
                 data: data,
                 duration: new Date() - startTime
-            })
+            }
         } catch (error) {
-            return res.status(500).json({
+            return {
                 code: 'FAILURE',
                 message: error
-            })
+            }
         }
     }
 }
