@@ -5,47 +5,55 @@ const moment = require('moment')
 const {validationResult} = require('express-validator')
 
 /**
- * router API 결과 단일화를 위한 처리
- * @type {{validationForm: ((function(*, *): Promise<*|undefined>)|*), responseForm: ((function(*, *, *): Promise<void>)|*)}}
+ * validation API 결과 단일화를 위한 처리
+ *
+ * @param req
+ * @returns {Promise<{code: string, message: any}>}
  */
-exports.routers = {
-    validationForm: async (req) => {
-        // 파라미터 조건이 맞지 않는경우, message return
-        const validation = validationResult(req).array()
+const validationForm = async (req) => {
+    // 파라미터 조건이 맞지 않는경우, message return
+    const validation = validationResult(req).array()
 
-        if (!_.isEmpty(validation)) {
-            return {
-                code: 'VALIDATION_FAILURE',
-                message: validation[0].msg
-            }
+    if (!_.isEmpty(validation)) {
+        return {
+            code: 'VALIDATION_FAILURE',
+            message: validation[0].msg
         }
-    },
-    responseForm: async (data) => {
-        // 최초 요청부터 완료까지 시간측정을 위한 셋팅.
-        const startTime = new Date();
+    }
+}
 
-        try {
-            return {
-                code: 'SUCCESS',
-                message: '성공',
-                doDT: new Date(),
-                data: data,
-                duration: new Date() - startTime
-            }
-        } catch (error) {
-            return {
-                code: 'FAILURE',
-                message: error
-            }
+/**
+ * router API 결과 단일화를 위한 처리
+ *
+ * @param data
+ * @returns {Promise<{code: string, message}|{duration: number, code: string, doDT: Date, data, message: string}>}
+ */
+const responseForm = async (data) => {
+    // 최초 요청부터 완료까지 시간측정을 위한 셋팅.
+    const startTime = new Date();
+
+    try {
+        return {
+            code: 'SUCCESS',
+            message: '성공',
+            doDT: new Date(),
+            data: data,
+            duration: new Date() - startTime
+        }
+    } catch (error) {
+        return {
+            code: 'FAILURE',
+            message: error
         }
     }
 }
 
 /**
  * console.log 단일화를 위한 처리
- * @type {{warn: exports.logs.warn, debug: exports.logs.debug, time: string, error: exports.logs.error, info: exports.logs.info}}
+ *
+ * @type {{warn: logs.warn, debug: logs.debug, time: string, error: logs.error, info: logs.info}}
  */
-exports.logs = {
+const logs = {
     debug: (message) => {
         console.debug(moment().format('YYYY-MM-DDTHH:mm:ss.SSS') + '\tDEBUG\t' + process.env.SERVER_NAME + '\t' + message)
     },
@@ -60,3 +68,9 @@ exports.logs = {
     },
     time: moment().format('YYYY-MM-DD HH:mm:ss.SSS')
 }
+
+module.exports = {
+    validationForm,
+    responseForm,
+    logs
+};
