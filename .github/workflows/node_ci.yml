@@ -12,11 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
+      - name: Server Deploy
+
+        uses: appleboy/ssh-action@master
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_GITHUB_TOKEN }}
+
+        with:
+          host: ${{ secrets.REMOTE_IP }}
+          key: ${{ secrets.REMOTE_PASSWORD }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+
+          script: |
+            whoami
+            cd ./GitHub/node-express-crud-api/
+            git pull
+            npm i
