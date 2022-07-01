@@ -22,7 +22,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_IP }}
           key: ${{ secrets.SSH_PEM_KEY }}
-#          port: ${{ secrets.REMOTE_SSH_PORT }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
 
           script: |
             whoami
