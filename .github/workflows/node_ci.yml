@@ -24,7 +24,7 @@ jobs:
           key: ${{ secrets.SSH_PEM_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
 
-          script: |
+          script:
             whoami
             cd ./GitHub/node-express-crud-api/
             git pull
