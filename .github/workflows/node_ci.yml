@@ -1,27 +1,23 @@
-# This is a basic workflow to help you get started with Actions
+name: Server Build
 
-name: deploy
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches:
-      - main
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  SSH:
+  build:
+    name: Server Build
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Run scripts in server
+      - name: Server Deploy
         uses: appleboy/ssh-action@master
         with:
+          key: ${{ secrets.SSH_PEM_KEY }}
           host: ${{ secrets.REMOTE_IP }}
           username: ${{ secrets.REMOTE_SSH_ID }}
-          key: ${{ secrets.SSH_PEM_KEY }}
           script: |
             whoami
             cd ./GitHub/node-express-crud-api/
