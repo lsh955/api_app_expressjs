@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.REMOTE_SSH_ID }}
           key: ${{ secrets.SSH_PEM_KEY }}
 
-          script:
+          script: |
             whoami
             cd ./GitHub/node-express-crud-api/
             git pull
