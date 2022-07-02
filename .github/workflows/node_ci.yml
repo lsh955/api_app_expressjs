@@ -15,8 +15,8 @@ jobs:
           host: ${{ secrets.REMOTE_IP }}
           username: ${{ secrets.REMOTE_SSH_ID }}
           password: ${{ secrets.SSH_PEM_KEY }}
-          port: 22
           timeout: 40s  # 30초 기본
+
           script: |
             whoami
             cd ./GitHub/node-express-crud-api/
