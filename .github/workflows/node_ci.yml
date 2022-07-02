@@ -13,17 +13,11 @@ jobs:
 
     steps:
       - name: Server Deploy
-
         uses: appleboy/ssh-action@master
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPOSITORY_GITHUB_TOKEN }}
-
         with:
           host: ${{ secrets.REMOTE_IP }}
           username: ${{ secrets.REMOTE_SSH_ID }}
           key: ${{ secrets.SSH_PEM_KEY }}
-
           script: |
             whoami
             cd ./GitHub/node-express-crud-api/
