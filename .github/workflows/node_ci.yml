@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Server Deploy
+      - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.4
         with:
-          host: ${{ secrets.REMOTE_IP }}
+          host: centos@3.38.162.163
           username: ${{ secrets.REMOTE_SSH_ID }}
           key: ${{ secrets.SSH_PEM_KEY }}
           port: 22
