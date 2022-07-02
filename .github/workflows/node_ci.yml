@@ -14,12 +14,12 @@ jobs:
       - name: Server Deploy
         uses: appleboy/ssh-action@master
         with:
-          host: 3.38.162.163
-          username: centos
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
           key: ${{ secrets.SSH_PEM_KEY }}
           port: 22
-#          script: |
-#            whoami
-#            cd ./GitHub/node-express-crud-api/
-#            git pull
-#            npm i
+          script: |
+            whoami
+            cd ./GitHub/node-express-crud-api/
+            git pull
+            npm i
