@@ -14,7 +14,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_IP }}
           username: ${{ secrets.REMOTE_SSH_ID }}
-          pem: ${{ secrets.SSH_PEM_KEY }}
+          password: ${{ secrets.SSH_PEM_KEY }}
           timeout: 40s  # 30초 기본
 
           script: |
