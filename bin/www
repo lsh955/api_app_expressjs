@@ -31,9 +31,13 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+formatter.logs.info(`SERVER START...`)
 formatter.logs.info('*******************************************')
-formatter.logs.info(`SERVER START... PORT = ${port}`)
-formatter.logs.info(`NODE_ENV = ${process.env.NODE_ENV}`)
+formatter.logs.info(`PORT = ${port}`)
+formatter.logs.info(`NODE ENV = ${process.env.NODE_ENV}`)
+formatter.logs.info(`DATABASE HOST = ${process.env.MariaDB_HOST}`)
+formatter.logs.info(`DATABASE USER = ${process.env.MariaDB_USER}`)
+formatter.logs.info(`DATABASE SCHEMA = ${process.env.MariaDB_DATABASE}`)
 formatter.logs.info('*******************************************')
 
 /**
