@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-let connection = {
+const pool = mysql.createPool({
     host: process.env.MariaDB_HOST,
     port: process.env.MariaDB_PORT,
     user: process.env.MariaDB_USER,
@@ -9,6 +9,33 @@ let connection = {
     dateStrings: "date",
     multipleStatements: true,
     connectionLimit: 30,
+})
+
+const connection = (sql, insertData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await pool.getConnection((error, connection) => {
+                connection.query(sql, insertData, (error, rows) => {
+                    if (error) {
+                        console.log(`SQL Error >> ${error}`)
+                        console.log(`message: ${error.message}`)
+                        console.log(`sql: ${error.sql}`)
+                        console.log(`code: ${error.code}`)
+                        reject("SQL Error")
+                    } else {
+                        console.log('DB Connection Rows >>', rows)
+                        resolve(rows)
+                    }
+                })
+                connection.release();   // Connectino Pool 반환
+            })
+        } catch (error) {
+            console.log(`DB Connection Error >> ${error}`)
+            reject(error)
+        }
+    })
 }
 
-module.exports = mysql.createPool(connection);
+module.exports = {
+    connection
+};
