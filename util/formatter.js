@@ -7,8 +7,9 @@ const {validationResult} = require('express-validator')
 /**
  * validation API 결과 단일화를 위한 처리
  *
- * @param req
- * @returns {Promise<{code: string, message: any}>}
+ * @param req   요청객체
+ * @param res   응답객체
+ * @returns {Promise<*>}
  */
 const validationForm = async (req, res) => {
     // 파라미터 조건이 맞지 않는경우, message return
