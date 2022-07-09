@@ -22,7 +22,7 @@ const getUserList = async (start, display) => {
                        ORDER BY idx DESC
                        LIMIT ?,?`;
 
-        const selectData = [start, display]
+        const selectData = [parseInt(start), parseInt(display)]
 
         return await connection(query, selectData);
     } catch (error) {
