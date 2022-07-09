@@ -8,7 +8,10 @@ const logFormatter = require('../module/logs')
  */
 const getUserList = async () => {
     try {
-        const query = `SELECT *
+        const query = `SELECT idx,
+                              name,
+                              address,
+                              date
                        FROM test_data`;
 
         return await connection(query);
