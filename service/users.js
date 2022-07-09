@@ -9,8 +9,8 @@ const logFormatter = require('../module/logs')
  */
 const getUserList = async (start, display) => {
     try {
-        if (start === "0" || start === undefined)
-            start = 1
+        if (start === undefined)
+            start = 0
         if (display === "0" || isNaN(display))
             display = 1
 
