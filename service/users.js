@@ -2,6 +2,10 @@ const {connection} = require("../config/database");
 
 const logFormatter = require('../module/logs')
 
+/**
+ * 유저정보 불러오기
+ * @returns {Promise<unknown>}
+ */
 const getUserList = async () => {
     try {
         const query = `SELECT *
