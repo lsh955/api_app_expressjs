@@ -4,13 +4,13 @@ const router = express.Router();
 const {
     validationForm,
     responseForm
-} = require("../module/form");
+} = require("../../module/form");
 const {
     getUserList,
     updateByUser,
     addByUser,
     deleteByUser
-} = require("../service/users");
+} = require("../../service/users");
 
 /**
  * 유저정보 불러오기
