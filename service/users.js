@@ -87,5 +87,8 @@ const deleteByUser = async (idx) => {
 }
 
 module.exports = {
-    getUserList
+    getUserList,
+    updateByUser,
+    addByUser,
+    deleteByUser
 };
