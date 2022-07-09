@@ -16,9 +16,11 @@ const {
  * 유저정보 불러오기
  */
 router.get('/', async (req, res) => {
+    const {start, display} = req.query
+
     await validationForm(req, res)
 
-    await getUserList()
+    await getUserList(start, display)
         .then(result => responseForm(res, result))
         .catch(error => responseForm(res, error))
 });
