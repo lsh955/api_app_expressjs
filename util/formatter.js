@@ -15,11 +15,18 @@ const validationForm = async (req, res) => {
     // 파라미터 조건이 맞지 않는경우, message return
     const validation = validationResult(req).array()
 
-    if (!_.isEmpty(validation)) {
-        return {
-            code: 'VALIDATION_FAILURE',
-            message: validation[0].msg
+    try {
+        if (!Array.isArray(validation) || validation.length !== 0) {
+            return res.json({
+                message: validation[0]['msg'],
+                value  : validation[0]['value']
+            })
         }
+    } catch (error) {
+        console.log(`validationForm >> ${error}`)
+        return res.json({
+            message: "validationForm 함수 에러"
+        })
     }
 }
 
