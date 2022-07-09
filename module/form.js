@@ -5,12 +5,12 @@ const {validationResult} = require("express-validator");
 const logFormatter = require('../module/logs')
 
 /**
-* validation API 결과 단일화를 위한 처리
-*
-* @param req   요청객체
-* @param res   응답객체
-* @returns {Promise<*>}
-*/
+ * validation API 결과 단일화를 위한 처리
+ *
+ * @param req   요청객체
+ * @param res   응답객체
+ * @returns {Promise<*>}
+ */
 const validationForm = async (req, res) => {
     // 파라미터 조건이 맞지 않는경우, message return
     const validation = validationResult(req).array()
