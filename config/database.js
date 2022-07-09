@@ -25,7 +25,7 @@ const connection = (sql, insertData) => {
                         logFormatter.logs.error(`code: ${error.code}`)
                         reject("SQL Error")
                     } else {
-                        console.log('DB Connection Rows >>', rows)
+                        logFormatter.logs.info(`DB Connection Rows >> ${JSON.stringify(rows)}`)
                         resolve(rows)
                     }
                 })
