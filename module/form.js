@@ -2,6 +2,8 @@ require('dotenv').config()  // .env 환경설정
 
 const {validationResult} = require("express-validator");
 
+const logFormatter = require('../module/logs')
+
 /**
 * validation API 결과 단일화를 위한 처리
 *
@@ -21,7 +23,7 @@ const validationForm = async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(`validationForm >> ${error}`)
+        logFormatter.logs.error(`validationForm >> ${error}`)
         return res.json({
             message: "validationForm 함수 에러"
         })
