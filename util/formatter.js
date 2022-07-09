@@ -10,7 +10,7 @@ const {validationResult} = require('express-validator')
  * @param req
  * @returns {Promise<{code: string, message: any}>}
  */
-const validationForm = async (req) => {
+const validationForm = async (req, res) => {
     // 파라미터 조건이 맞지 않는경우, message return
     const validation = validationResult(req).array()
 
