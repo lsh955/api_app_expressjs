@@ -1,5 +1,4 @@
 const {connection} = require("../config/database");
-
 const logFormatter = require('../module/logs')
 
 /**

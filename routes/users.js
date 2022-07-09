@@ -1,8 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const {validationForm, responseForm} = require("../module/form");
-const {getUserList} = require("../service/users");
+const {
+    validationForm,
+    responseForm
+} = require("../module/form");
+const {
+    getUserList,
+    updateByUser,
+    addByUser,
+    deleteByUser
+} = require("../service/users");
 
 /**
  * 유저정보 불러오기
