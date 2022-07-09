@@ -33,26 +33,27 @@ const validationForm = async (req, res) => {
 /**
  * router API 결과 단일화를 위한 처리
  *
- * @param data
- * @returns {Promise<{code: string, message}|{duration: number, code: string, doDT: Date, data, message: string}>}
+ * @param res   응답객체
+ * @param data  서비스 데이터
+ * @returns {Promise<*>}
  */
-const responseForm = async (data) => {
+const responseForm = async (res, data) => {
     // 최초 요청부터 완료까지 시간측정을 위한 셋팅.
     const startTime = new Date();
 
     try {
-        return {
+        return res.json({
             code: 'SUCCESS',
             message: '성공',
             doDT: new Date(),
             data: data,
             duration: new Date() - startTime
-        }
+        })
     } catch (error) {
-        return {
+        return res.json({
             code: 'FAILURE',
             message: error
-        }
+        })
     }
 }
 
