@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {validationForm, responseForm} = require("../util/formatter");
+const {validationForm, responseForm} = require("../module/form");
 const {getUserList} = require("../service/users");
 
 /**
