@@ -16,9 +16,11 @@ const {
  * 유저정보 불러오기
  */
 router.get('/', async (req, res) => {
+    const {start, display} = req.query
+
     await validationForm(req, res)
 
-    await getUserList()
+    await getUserList(start, display)
         .then(result => responseForm(res, result))
         .catch(error => responseForm(res, error))
 });
@@ -27,7 +29,7 @@ router.get('/', async (req, res) => {
  * 유저정보 수정하기
  */
 router.put('/', async (req, res) => {
-    const {idx, name, address, date} = req.query
+    const {idx, name, address, date} = req.body
 
     await validationForm(req, res)
 

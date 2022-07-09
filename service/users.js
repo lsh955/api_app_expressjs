@@ -3,17 +3,23 @@ const logFormatter = require('../module/logs')
 
 /**
  * 유저정보 불러오기
+ * @param start     결과 중, 결과의 시작점
+ * @param display   결과의 개수
  * @returns {Promise<unknown>}
  */
-const getUserList = async () => {
+const getUserList = async (start, display) => {
     try {
         const query = `SELECT idx,
                               name,
                               address,
                               date
-                       FROM test_data`;
+                       FROM test_data
+                       ORDER BY idx DESC
+                       LIMIT ?,?`;
 
-        return await connection(query);
+        const selectData = [start, display]
+
+        return await connection(query, selectData);
     } catch (error) {
         logFormatter.logs.error(`getUserList Function Error >> ${error}`)
         return error
