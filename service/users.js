@@ -1,5 +1,7 @@
 const {connection} = require("../config/database");
 
+const logFormatter = require('../module/logs')
+
 const getUserList = async () => {
     try {
         const query = `SELECT *
@@ -7,7 +9,7 @@ const getUserList = async () => {
 
         return await connection(query);
     } catch (error) {
-        console.log(`getUserList Function Error >> ${error}`)
+        logFormatter.logs.error(`getUserList Function Error >> ${error}`)
         return error
     }
 }

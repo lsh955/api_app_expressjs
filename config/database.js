@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 
+const logFormatter = require("../module/logs");
+
 const pool = mysql.createPool({
     host: process.env.MariaDB_HOST,
     port: process.env.MariaDB_PORT,
@@ -17,10 +19,10 @@ const connection = (sql, insertData) => {
             await pool.getConnection((error, connection) => {
                 connection.query(sql, insertData, (error, rows) => {
                     if (error) {
-                        console.log(`SQL Error >> ${error}`)
-                        console.log(`message: ${error.message}`)
-                        console.log(`sql: ${error.sql}`)
-                        console.log(`code: ${error.code}`)
+                        logFormatter.logs.error(`SQL Error >> ${error}`)
+                        logFormatter.logs.error(`message: ${error.message}`)
+                        logFormatter.logs.error(`sql: ${error.sql}`)
+                        logFormatter.logs.error(`code: ${error.code}`)
                         reject("SQL Error")
                     } else {
                         console.log('DB Connection Rows >>', rows)
@@ -30,7 +32,7 @@ const connection = (sql, insertData) => {
                 connection.release();   // Connectino Pool 반환
             })
         } catch (error) {
-            console.log(`DB Connection Error >> ${error}`)
+            logFormatter.logs.error(`DB Connection Error >> ${error}`)
             reject(error)
         }
     })
