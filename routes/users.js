@@ -1,18 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-const formatter = require("../util/formatter");
+const {validationForm, responseForm} = require("../util/formatter");
 const {getUserList} = require("../service/users");
 
 /**
  * 유저정보 불러오기
  */
 router.get('/', async (req, res) => {
-    await formatter.validationForm(req)
+    await validationForm(req, res)
 
     await getUserList()
-        .then(result => res.json(result))
-        .catch(error => res.json(error))
+        .then(result => responseForm(res, result))
+        .catch(error => responseForm(res, error))
 });
 
 module.exports = router;
