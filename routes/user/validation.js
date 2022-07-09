@@ -2,7 +2,8 @@ const {query, body} = require('express-validator')
 
 /**
  * validation 스키마 검증 룰
- * : validation 스키마는 요청에 대한 검증 또는 삭제를 정의하는 개체
+ *
+ * validation 스키마는 요청에 대한 검증 또는 삭제를 정의하는 개체
  */
 const validationSchema = {
     list: [

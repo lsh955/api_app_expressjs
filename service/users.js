@@ -2,7 +2,8 @@ const {connection} = require("../config/database");
 const logFormatter = require('../module/logs')
 
 /**
- * 유저정보 불러오기
+ * 유저정보 불러오기업
+ *
  * @param start     결과 중, 결과의 시작점
  * @param display   결과의 개수
  * @returns {Promise<unknown>}
@@ -33,6 +34,7 @@ const getUserList = async (start, display) => {
 
 /**
  * 유저정보 수정하기
+ *
  * @param idx       시퀀스
  * @param name      성함
  * @param address   주소
@@ -58,6 +60,7 @@ const updateByUser = async (idx, name, address, date) => {
 
 /**
  * 유저정보 저장하기
+ *
  * @param name      성함
  * @param address   주소
  * @param date      등록일시
@@ -79,6 +82,7 @@ const addByUser = async (name, address, date) => {
 
 /**
  * 유저정보 삭제하기
+ *
  * @param idx       시퀀스
  * @returns {Promise<unknown>}
  */
