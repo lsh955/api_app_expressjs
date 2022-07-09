@@ -19,7 +19,7 @@ const validationForm = async (req, res) => {
         if (!Array.isArray(validation) || validation.length !== 0) {
             return res.json({
                 message: validation[0]['msg'],
-                value  : validation[0]['value']
+                value: validation[0]['value']
             })
         }
     } catch (error) {
