@@ -18,7 +18,7 @@ dotenv.config({
 });
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/user/users');
+const usersRouter = require('./routes/user');
 
 const app = express();
 
