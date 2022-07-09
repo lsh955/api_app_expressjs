@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const {
+    validationSchema
+} = require('./validation')
+const {
     validationForm,
     responseForm
 } = require("../../module/form");
@@ -15,7 +18,7 @@ const {
 /**
  * 유저정보 불러오기
  */
-router.get('/', async (req, res) => {
+router.get('/', validationSchema.list, async (req, res) => {
     const {start, display} = req.query
 
     await validationForm(req, res)
@@ -28,7 +31,7 @@ router.get('/', async (req, res) => {
 /**
  * 유저정보 수정하기
  */
-router.put('/', async (req, res) => {
+router.put('/', validationSchema.updateByUser, async (req, res) => {
     const {idx, name, address, date} = req.body
 
     await validationForm(req, res)
@@ -41,7 +44,7 @@ router.put('/', async (req, res) => {
 /**
  * 유저정보 저장하기
  */
-router.post('/', async (req, res) => {
+router.post('/', validationSchema.addByUser, async (req, res) => {
     const {name, address, date} = req.body
 
     await validationForm(req, res)
@@ -54,7 +57,7 @@ router.post('/', async (req, res) => {
 /**
  * 유저정보 삭제하기
  */
-router.delete('/', async (req, res) => {
+router.delete('/', validationSchema.deleteByUser, async (req, res) => {
     const {idx} = req.query
 
     await validationForm(req, res)
