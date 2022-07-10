@@ -5,7 +5,7 @@ const logFormatter = require('../module/logs')
  * 유저정보 불러오기
  *
  * @param start     결과 중, 결과의 시작점
- * @param display   결과의 개수
+ * @param display   결과의 노출개수
  * @returns {Promise<unknown>}
  */
 const getUserList = async (start, display) => {
@@ -28,6 +28,27 @@ const getUserList = async (start, display) => {
         return await connection(query, selectData);
     } catch (error) {
         logFormatter.logs.error(`getUserList Function Error >> ${error}`)
+        return error
+    }
+}
+
+/**
+ * 유저정보 전체 카운트
+ *
+ * @returns {Promise<*|{total: unknown}>}
+ */
+const getUserListTotalCount = async () => {
+    try {
+        const query = `SELECT COUNT(*)
+                       FROM test_data`;
+
+        const rows = await connection(query);
+
+        return {
+            total : rows[0]
+        }
+    } catch (error) {
+        logFormatter.logs.error(`getUserListTotalCount Function Error >> ${error}`)
         return error
     }
 }
@@ -105,5 +126,6 @@ module.exports = {
     getUserList,
     updateByUser,
     addByUser,
-    deleteByUser
+    deleteByUser,
+    getUserListTotalCount
 };
