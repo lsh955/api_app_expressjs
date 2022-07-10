@@ -1,4 +1,4 @@
-const {connection} = require("../config/database");
+const {getDbByConnection} = require("../config/database");
 const logFormatter = require('../module/logs')
 
 /**
@@ -25,7 +25,7 @@ const getUserList = async (start, display) => {
 
         const selectData = [parseInt(start), parseInt(display)]
 
-        return await connection(query, selectData);
+        return await getDbByConnection(query, selectData);
     } catch (error) {
         logFormatter.logs.error(`getUserList Function Error >> ${error}`)
         return error
@@ -42,7 +42,7 @@ const getUserListTotalCount = async () => {
         const query = `SELECT COUNT(*)
                        FROM test_data`;
 
-        const rows = await connection(query);
+        const rows = await getDbByConnection(query);
 
         return {
             total : rows[0]
@@ -72,7 +72,7 @@ const updateByUser = async (idx, name, address, date) => {
 
         const updateData = [name, address, date, idx]
 
-        return await connection(query, updateData);
+        return await getDbByConnection(query, updateData);
     } catch (error) {
         logFormatter.logs.error(`updateByUser Function Error >> ${error}`)
         return error
@@ -94,7 +94,7 @@ const addByUser = async (name, address, date) => {
 
         const insertData = [name, address, date]
 
-        return await connection(query, insertData);
+        return await getDbByConnection(query, insertData);
     } catch (error) {
         logFormatter.logs.error(`addByUser Function Error >> ${error}`)
         return error
@@ -115,7 +115,7 @@ const deleteByUser = async (idx) => {
 
         const deleteData = [idx]
 
-        return await connection(query, deleteData);
+        return await getDbByConnection(query, deleteData);
     } catch (error) {
         logFormatter.logs.error(`deleteByUser Function Error >> ${error}`)
         return error
