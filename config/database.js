@@ -13,7 +13,7 @@ const pool = mysql.createPool({
     connectionLimit: 30,
 })
 
-const connection = (sql, insertData) => {
+const getDbByConnection = (sql, insertData) => {
     return new Promise(async (resolve, reject) => {
         try {
             await pool.getConnection((error, connection) => {
@@ -39,5 +39,5 @@ const connection = (sql, insertData) => {
 }
 
 module.exports = {
-    connection
+    getDbByConnection
 };
