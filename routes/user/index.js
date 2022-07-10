@@ -12,8 +12,7 @@ const {
     getUserList,
     updateByUser,
     addByUser,
-    deleteByUser,
-    getUserListTotalCount
+    deleteByUser
 } = require("../../service/users");
 
 /**
@@ -23,10 +22,6 @@ router.get('/', validationSchema.list, async (req, res) => {
     const {start, display} = req.query
 
     await validationForm(req, res)
-
-    // TODO :: 두개의 모듈을 깔끔하게 엮을 방법을 생각해 보자!
-    // const totalCount = await getUserListTotalCount()
-    // const userList = await getUserList(start, display)
 
     await getUserList(start, display)
         .then(result => responseForm(res, result))
