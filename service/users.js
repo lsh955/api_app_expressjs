@@ -45,7 +45,7 @@ const getUserListTotalCount = async () => {
         const rows = await connection(query);
 
         return {
-            total : rows
+            total : rows[0]
         }
     } catch (error) {
         logFormatter.logs.error(`getUserListTotalCount Function Error >> ${error}`)
