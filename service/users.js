@@ -33,6 +33,27 @@ const getUserList = async (start, display) => {
 }
 
 /**
+ * 유저정보 전체 카운트
+ *
+ * @returns {Promise<*|{total: unknown}>}
+ */
+const getUserListTotalCount = async () => {
+    try {
+        const query = `SELECT COUNT(*)
+                       FROM test_data`;
+
+        const rows = await connection(query);
+
+        return {
+            total : rows
+        }
+    } catch (error) {
+        logFormatter.logs.error(`getUserListTotalCount Function Error >> ${error}`)
+        return error
+    }
+}
+
+/**
  * 유저정보 수정하기
  *
  * @param idx       시퀀스
@@ -105,5 +126,6 @@ module.exports = {
     getUserList,
     updateByUser,
     addByUser,
-    deleteByUser
+    deleteByUser,
+    getUserListTotalCount
 };
