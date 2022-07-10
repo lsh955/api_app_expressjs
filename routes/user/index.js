@@ -12,7 +12,8 @@ const {
     getUserList,
     updateByUser,
     addByUser,
-    deleteByUser
+    deleteByUser,
+    getUserListTotalCount
 } = require("../../service/users");
 
 /**
