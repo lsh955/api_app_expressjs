@@ -12,12 +12,31 @@ const {
     getUserList,
     updateByUser,
     addByUser,
-    deleteByUser,
-    getUserListTotalCount
+    deleteByUser
 } = require("../../service/users");
 
 /**
- * 유저정보 불러오기
+ * @swagger
+ *  /:
+ *    get:
+ *      tags:
+ *      - product
+ *      description: 유저정보 불러오기
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: start
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 결과 중, 결과의 시작점
+ *        - in: query
+ *          name: display
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 결과의 노출개수
  */
 router.get('/', validationSchema.list, async (req, res) => {
     const {start, display} = req.query
@@ -34,7 +53,39 @@ router.get('/', validationSchema.list, async (req, res) => {
 });
 
 /**
- * 유저정보 수정하기
+ * @swagger
+ *  /:
+ *    put:
+ *      tags:
+ *      - product
+ *      description: 유저정보 수정하기
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: idx
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 시퀀스
+ *        - in: query
+ *          name: name
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 성함
+ *       - in: query
+ *          name: address
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 주소
+ *        - in: query
+ *          name: date
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 등록일시
  */
 router.put('/', validationSchema.updateByUser, async (req, res) => {
     const {idx, name, address, date} = req.body
@@ -47,7 +98,33 @@ router.put('/', validationSchema.updateByUser, async (req, res) => {
 });
 
 /**
- * 유저정보 저장하기
+ * @swagger
+ *  /:
+ *    post:
+ *      tags:
+ *      - product
+ *      description: 유저정보 저장하기
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: name
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 성함
+ *        - in: query
+ *          name: address
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 주소
+ *       - in: query
+ *          name: date
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 등록일시
  */
 router.post('/', validationSchema.addByUser, async (req, res) => {
     const {name, address, date} = req.body
@@ -60,7 +137,21 @@ router.post('/', validationSchema.addByUser, async (req, res) => {
 });
 
 /**
- * 유저정보 삭제하기
+ * @swagger
+ *  /:
+ *    delete:
+ *      tags:
+ *      - product
+ *      description: 유저정보 삭제하기
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: idx
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 시퀀스
  */
 router.delete('/', validationSchema.deleteByUser, async (req, res) => {
     const {idx} = req.query
