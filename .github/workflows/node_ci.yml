@@ -8,17 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-  Deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
     steps:
       - name: SSH Remote Commands
-      - uses: actions/checkout@v2
+        uses: appleboy/ssh-action@v0.1.4
 
-        env:
-          HOSTNAME : ${{ secrets.REMOTE_IP }}
-          USER_NAME : ${{ secrets.REMOTE_SSH_ID }}
+        with:
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
           PRIVATE_KEY: ${{ secrets.SSH_PEM_KEY }}
+          timeout: 40s  # 30초 기본
 
           script: whoami
