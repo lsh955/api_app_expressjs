@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: SSH Remote Commands
-      - uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/ssh-action@v0.1.4
 
         with:
           host: ${{ secrets.REMOTE_IP }}
@@ -18,8 +18,4 @@ jobs:
           PRIVATE_KEY: ${{ secrets.SSH_PEM_KEY }}
           timeout: 40s  # 30초 기본
 
-          script: |
-            whoami
-            cd ./GitHub/node-express-crud-api/
-            git pull
-            npm i
+          script: whoami
