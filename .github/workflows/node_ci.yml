@@ -8,10 +8,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
     steps:
       - name: SSH Remote Commands
-        uses: appleboy/ssh-action@v0.1.4
-        with:
+      - uses: appleboy/ssh-action@v0.1.4
+
+        env:
           host: ${{ secrets.REMOTE_IP }}
           username: ${{ secrets.REMOTE_SSH_ID }}
           PRIVATE_KEY: ${{ secrets.SSH_PEM_KEY }}
