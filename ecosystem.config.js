@@ -3,7 +3,7 @@
 module.exports = {
     apps: [
         {
-            name  : "NODE EXPRESS CRUD API",
+            name  : "NODE_EXPRESS_CRUD_API",
             script: "./bin/www",
 
             instances: 2, // instances:0 CPU core 수만큼 생성
